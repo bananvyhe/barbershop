@@ -4,8 +4,8 @@ require 'sinatra/reloader'
 require 'sqlite3'
 
 def get_db
-	return SQLite3::Database.new 'barbershop.db'
-	db.results_as_hash=true
+	db=SQLite3::Database.new 'barbershop.db'
+	db.results_as_hash = true
 	return db
 end
 
@@ -70,12 +70,7 @@ end
 
 get '/showusers' do
 	db = get_db
-	# db.execute 'select * from users' do |row|
-	# 	print row['name']
-	# 	print "\t-\t"
-	# 	puts row['datestamp']
-	# 	puts '=========='
-	# end
+	@results = db.execute 'select * from users order by id desc'
 	erb :showusers
 	  
 end
