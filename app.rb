@@ -8,7 +8,7 @@ def is_barber_exists? db, name
 end
 
 
-def seed_db db, barbershop
+def seed_db db, barbers
 	barbers.each do |barber|
 		if !is_barber_exists? db, barber
 			db.execute 'insert into Barbers (name) values (?)',[barber]
@@ -40,6 +40,7 @@ configure do
 			"id" INTEGER PRIMARY KEY AUTOINCREMENT,
 			"name" TEXT 
 		)'
+		seed_db db, ['Jessie Pinkman', 'Walter White', 'Gus Fring', 'Mike Ehrmantraut']
 end
 
 get '/' do
